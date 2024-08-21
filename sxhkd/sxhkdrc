@@ -2,13 +2,13 @@ alt + Return
   st
 
 alt + space
-  dmenu_run
+  dmenu_run $_DMENU_OPTS
 
 alt + shift + r
   bspc wm --restart
 
 alt + shift + q
-  bash ~/.config/sxhkd/scripts/powermenu.sh
+  sel=$(printf '%s\n%s\n%s' 'Lock' 'Logout' 'Poweroff' | dmenu $_DMENU_OPTS); case $sel in; Lock) echo slock;; Logout) echo bspc quit;; Poweroff) echo systemctl poweroff;; esac
 
 alt + {_, control} + q
   bspc node {--close, --kill}
@@ -17,7 +17,7 @@ super + l
   slock
 
 alt + Tab
-  bash ~/.config/sxhkd/scripts/window-switch.sh
+  bspc node --focus last
 
 alt + {f, t}
   bspc node --state {'~fullscreen', '~floating'}
@@ -54,13 +54,13 @@ super + {_, shift} + {Up, Left, Down, Right}
 
 
 XF86MonBrightnessUp
-  brightnessctl set 10%+
+  brightnessctl set 5%+ -q
 
 XF86MonBrightnessDown
-  brightnessctl set 10%-
+  brightnessctl set 5%- -q --min-value=28
 
 XF86AudioRaiseVolume
-  pamixer --increase 5 --allow-boost
+  pamixer --increase 5 --allow-boost --set-limit 150
 
 XF86AudioLowerVolume
   pamixer --decrease 5 --allow-boost

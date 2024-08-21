@@ -3,6 +3,7 @@ alias cat=bat
 alias df='df -h'
 alias du='du -h'
 alias lsb='lsblk'
+alias copy='xsel -ib'
 
 # source files here
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh

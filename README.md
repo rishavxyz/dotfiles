@@ -1,11 +1,15 @@
 # My personal config files for minimal Arch Linux setup
 
+![preview image of my home screen with a terminal](./preview.png)
+
 ### Packages I use for
 - **WM** bspwm
 - **Terminal** st
 - **Shell** zsh
 - **Status bar** polybar
 - **Fonts** Monaspace (sans and mono)
+
+I don't use a login/display manager. The command I use is `startx` provided by `xorg-xinit` package.
 
 ### Install the packages
 Assuming you have just installed fresh Arch Linux with no DE/WM installed, you may install the following packages.

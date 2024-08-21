@@ -14,7 +14,17 @@ bindkey -v
 # bun
 export BUN_INSTALL="$HOME/.bun"
 
+# Decoration for dmenu
+export _DMENU_OPTS=('-nb' '#191724' '-nf' '#c4a7e7' '-sb' '#f6c177' '-sf' '#191724' '-p' '' '-fn' 'MonaSans Medium:size=10')
 
+# configs
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
+export XDG_RUNTIME_DIR="/run/user/$UID"
+export XDG_DATA_DIRS="/usr/local/share:/usr/share:$HOME/.local/share"
+export XDG_CONFIG_DIRS="/etc/xdg"
 
 # PATH
 path+=(~/dotfiles/bin ~/projects/go/bin $BUN_INSTALL/bin)
