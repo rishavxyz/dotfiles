@@ -1,0 +1,9 @@
+# aliases
+alias cat=bat
+alias df='df -h'
+alias du='du -h'
+alias lsb='lsblk'
+
+# source files here
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
