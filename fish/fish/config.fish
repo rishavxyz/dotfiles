@@ -62,6 +62,7 @@ function prompt__battery
   set -l sts (cat /sys/class/power_supply/BAT0/status)
   set -l icon
   set -l chargingicon
+  set -l batteryclr '9ccfd8' '191724'
 
   if test $sts = 'Charging'
     set chargingicon ''
@@ -100,11 +101,15 @@ function prompt__battery
   if [ $lvl -ge 1 -a $lvl -le 9 ]
     set icon ''
   end
-  clrbg 9ccfd8 191724
-  echo -n " $icon $lvl% $chargingicon"
-  if [ $sts != 'Charging' -a $lvl -lt 20 ]
-    clr --bold; echo -n '(low)'; clr normal
+
+  if [ $sts != 'Charging' -a $lvl -le 20 ]
+    set lowbattery '!!!'
+    clrbg 9ccfd8 --bold d7827e
+  else
+    clrbg 9ccfd8 191724
   end
+
+  echo -n " $icon $lvl% $chargingicon$lowbattery"
   clrbg black 9ccfd8; echo -n ''; clr normal
 end
 
@@ -112,7 +117,7 @@ function prompt__user
   if fish_is_root_user
     printf '%s%s ' (clr --bold f6c177) (string upper $USER)
   else
-    printf '%s%s ' (set_color --bold e0def4) (string upper $USER)
+    printf '%s%s ' (clr --bold e0def4) (string upper $USER)
   end
   clr normal
 end
