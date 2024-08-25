@@ -2,13 +2,13 @@ alt + Return
   st
 
 alt + space
-  dmenu_run $_DMENU_OPTS
+  dmenu_run ${_DMENU_OPTS[@]}
 
 alt + shift + r
   bspc wm --restart
 
 alt + shift + q
-  sel=$(printf '%s\n%s\n%s' 'Lock' 'Logout' 'Poweroff' | dmenu $_DMENU_OPTS); case $sel in; Lock) echo slock;; Logout) echo bspc quit;; Poweroff) echo systemctl poweroff;; esac
+  sel=$(printf '%s\n%s\n%s' 'Lock' 'Logout' 'Poweroff' | dmenu ${_DMENU_OPTS[@]}); case $sel in; Lock) notify-send 'is slock installed';; Logout) bspc quit;; Poweroff) systemctl poweroff;; esac
 
 alt + {_, control} + q
   bspc node {--close, --kill}

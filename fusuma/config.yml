@@ -1,0 +1,20 @@
+swipe:
+  3:
+    left:
+      #sendkey: 'LEFTALT+RIGHT'
+      command: 'bspc desktop --focus next'
+    right:
+      #sendkey: 'LEFTALT+LEFT'
+      command: 'bspc desktop --focus prev'
+    up:
+      sendkey: 'LEFTCTRL+T'
+    down:
+      sendkey: 'LEFTCTRL+W'
+
+threshold:
+  swipe: 0.2
+  pinch: 0.2
+
+interval:
+  swipe: 1
+  pinch: 0.2

@@ -1,11 +1,12 @@
 #!/usr/bin/sh
 
 startOnce() {
-  [ pidof "$1" ] || "$@" &
-  sleep 0.3s
+  [ pidof "$1" ] && killall "$1"
+  sleep '0.3s'
+  "$@" &
 }
 
-# do bspc rule --add $window state=floating follow=on desktop=Number
+### $ bspc rule --add $window state=floating follow=on desktop=Number
 
 bspc monitor -d 1 2 3 4 5 6
 
@@ -25,10 +26,10 @@ bspc config focused_border_color "#c4a7e7"
 bspc config active_border_color "#eb6f92"
 
 wmname LG3D
-#export SXHKD_SHELL=sh
 
 xsetroot -cursor_name left_ptr
 
 #### autostart applications
 startOnce sxhkd
 startOnce polybar
+startOnce fusuma

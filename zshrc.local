@@ -1,10 +1,105 @@
-# aliases
+# Filename:      /etc/skel/.zshrc
+# Purpose:       config file for zsh (z shell)
+# Authors:       (c) grml-team (grml.org)
+# Bug-Reports:   see http://grml.org/bugs/
+# License:       This file is licensed under the GPL v2 or any later version.
+################################################################################
+
+## global aliases (for those who like them) ##
+
+alias -g '....'='../../..'
+alias -g C='|wc -l'
+alias -g G='|grep'
+alias -g H='|head'
+alias -g Hl=' --help |& less -r'
+alias -g J='|jq'
+alias -g K='|keep'
+alias -g L='|less'
+alias -g LL='|& less -r'
+alias -g N='&>/dev/null'
+alias -g R='| tr A-z N-za-m'
+alias -g SL='| sort | less'
+alias -g S='| sort'
+alias -g T='|tail'
+
+# some mine
 alias cat=bat
 alias df='df -h'
 alias du='du -h'
 alias lsb='lsblk'
 alias copy='xsel -ib'
+alias j='z'
+alias cd='z'
 
-# source files here
+# pacman coommands
+alias i='sudo pacman --needed -S'
+alias s='pacman -Ss'
+alias r='sudo pacman -Runsc'
+alias rdd='sudo pacman -Rddns'
+alias ia='sudo aura --needed -Acax'
+alias si='pacman -Si'
+alias sa='aura -As'
+
+## Switching shell safely and efficiently? http://www.zsh.org/mla/workers/2001/msg02410.html
+bash() {
+  NO_SWITCH="yes" command bash "$@"
+}
+restart () {
+  exec $SHELL $SHELL_ARGS "$@"
+}
+
+## Download a file and display it locally
+uopen() {
+  emulate -L zsh
+  if ! [[ -n "$1" ]] ; then
+    print "Usage: uopen \$URL/\$file">&2
+    return 1
+  else
+    FILE=$1
+    MIME=$(curl --head $FILE | \
+      grep Content-Type | \
+      cut -d ' ' -f 2 | \
+      cut -d\; -f 1)
+          MIME=${MIME%$'\r'}
+          curl $FILE | see ${MIME}:-
+  fi
+}
+
+## Memory overview
+memusage() {
+  ps aux | awk '{if (NR > 1) print $5;
+  if (NR > 2) print "+"}
+  END { print "p" }' | dc
+}
+
+## print hex value of a number
+hex() {
+  emulate -L zsh
+  if [[ -n "$1" ]]; then
+    printf "%x\n" $1
+  else
+    print 'Usage: hex <number-to-convert>'
+    return 1
+  fi
+}
+
+# bun completions
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+
+# configs
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
+export XDG_RUNTIME_DIR="/run/user/$UID"
+export XDG_DATA_DIRS="/usr/local/share:/usr/share:$HOME/.local/share"
+export XDG_CONFIG_DIRS="/etc/xdg"
+
+export MANWIDTH=${MANWIDTH:-80}
+
+# sauce
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
