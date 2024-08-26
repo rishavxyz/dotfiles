@@ -39,6 +39,7 @@ alias rdd='sudo pacman -Rddns'
 alias ia='sudo aura --needed -Acax'
 alias si='pacman -Si'
 alias sa='aura -As'
+alias up='uptime -p'
 
 ## Switching shell safely and efficiently? http://www.zsh.org/mla/workers/2001/msg02410.html
 bash() {
