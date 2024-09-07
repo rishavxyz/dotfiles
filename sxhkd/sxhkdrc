@@ -1,14 +1,18 @@
 alt + Return
   st
 
+alt + shift + Return
+  bspc rule -a "st-float" -o state=floating \
+  rectangle=720x428+323+180 && st -c "st-float"
+
 alt + space
-  dmenu_run ${_DMENU_OPTS[@]}
+  rofi -show drun
 
 alt + shift + r
-  bspc wm --restart
+  bspc wm --restart; notify-send 'BSPWM restarted successfully'
 
 alt + shift + q
-  sel=$(printf '%s\n%s\n%s' 'Lock' 'Logout' 'Poweroff' | dmenu ${_DMENU_OPTS[@]}); case $sel in; Lock) notify-send 'is slock installed';; Logout) bspc quit;; Poweroff) systemctl poweroff;; esac
+  sleep 1; bspc quit
 
 alt + {_, control} + q
   bspc node {--close, --kill}

@@ -1,151 +1,42 @@
-# GLOBAL VARIALBLES
-set -gx EDITOR nvim
-
-# set fish colors to match rose-pine theme
-set fish_color_autosuggestion 56526e
-set fish_color_command 9ccfd8
-set fish_color_param f6c177
-
-
 if status is-interactive
-    # Commands to run in interactive sessions can go here
-end
+    set fish_greeting ''
 
-function fish_greeting
-    # neofetch --config $HOME/.config/neofetch/configs/sm3.conf
-end
+    if functions -q fzf_configure_bindings
+        set -q fzf_fd_opts
+        or set fzf_fd_opts --hidden --max-depth=5 \
+            -E node_modules/ -E .local/share/ -E .local/state/ -E .bun/ \
+            -E .cabal/ -E .cache/ -E .cargo/ -E .fehbg/ -E .mozilla/ \
+            -E .ghcup/ -E .pki/ -E .rustup/ -E .stack/ -E .vscode/ \
+            -E .zen/ -E .android/ -E .gtkrc-2.0/ -E .npm/
 
-function clr
-    set_color $argv
-end
-function clrbg
-    set_color --background $argv
-end
+        set -q fzf_preview_file_cmd
+        or set fzf_preview_file_cmd cat
 
-function prompt__jobs
-    for job in (jobs)
-        printf '%s⚙ %s\n' (clr 908caa) $job
-    end
-end
-
-function prompt__status
-    if [ $cmd__status -ne 0 ]
-        clrbg eb6f92 191724
-        echo -n ' ✘ '
-        clrbg c4a7e7 eb6f92
-        echo -n ''
-    end
-    clr normal
-end
-
-function prompt__date
-    set -l hours (date +%I)
-    set -l minutes (date +%M)
-    set -l ampm (date +%P)
-    set -l day (date +%a)
-    set -l month (date +%b)
-    set -l date (date +%d)
-
-    clrbg c4a7e7 191724
-    echo -n " $day, $month $date"
-    clrbg f6c177 c4a7e7
-    echo -n ''
-    clrbg f6c177 191724
-    echo -n " $hours:$minutes $ampm"
-    clrbg 9ccfd8 f6c177
-    echo -n ''
-    clr normal
-end
-
-function prompt__battery
-    set -l lvl (cat /sys/class/power_supply/BAT0/capacity)
-    set -l sts (cat /sys/class/power_supply/BAT0/status)
-    set -l icon
-    set -l chargingicon
-
-    if test $sts = Charging
-        set chargingicon ''
+        fzf_configure_bindings \
+            --directory=\cf \
+            --history=\ch \
+            --git_status=\cg
     end
 
-    if [ $lvl -ge 96 -a $lvl -le 100 ]
-        set icon ''
+    if type -q eza
+        alias ls='eza --icons=always'
+        alias ll='ls -l'
+        alias l='ls -T -L1'
+        alias l='ll'
+        alias la='ls -la'
     end
-    if [ $lvl -ge 90 -a $lvl -le 95 ]
-        set icon ''
-    end
-    if [ $lvl -ge 80 -a $lvl -le 89 ]
-        set icon ''
-    end
-    if [ $lvl -ge 70 -a $lvl -le 79 ]
-        set icon ''
-    end
-    if [ $lvl -ge 60 -a $lvl -le 69 ]
-        set icon ''
-    end
-    if [ $lvl -ge 50 -a $lvl -le 59 ]
-        set icon ''
-    end
-    if [ $lvl -ge 40 -a $lvl -le 49 ]
-        set icon ''
-    end
-    if [ $lvl -ge 30 -a $lvl -le 39 ]
-        set icon ''
-    end
-    if [ $lvl -ge 20 -a $lvl -le 29 ]
-        set icon ''
-    end
-    if [ $lvl -ge 10 -a $lvl -le 19 ]
-        set icon ''
-    end
-    if [ $lvl -ge 1 -a $lvl -le 9 ]
-        set icon ''
-    end
-    clrbg 9ccfd8 191724
-    echo -n " $icon $lvl% $chargingicon"
-    if [ $sts != Charging -a $lvl -lt 20 ]
-        clr --bold
-        echo -n '(low)'
-        clr normal
-    end
-    clrbg black 9ccfd8
-    echo -n ''
-    clr normal
-end
 
-function prompt__user
-    if fish_is_root_user
-        printf '%s%s ' (clr --bold f6c177) (string upper $USER)
-    else
-        printf '%s%s ' (set_color --bold e0def4) (string upper $USER)
-    end
-    clr normal
-end
+    type -q bat; and alias cat='bat --style=full'
+    type -q z; and alias j=z
 
-function prompt__git
-    if test fish_git_prompt
-        clr 908caa
-        echo -n ''(fish_git_prompt) ''
-    end
-    clr normal
-end
+    functions -q qotd; and qotd
 
-function fish_prompt
-    set -g cmd__status $status
-    prompt__jobs
-    prompt__status
-    prompt__date
-    prompt__battery
-    echo
-    prompt__user
-    prompt__git
-    set_color normal
-end
-
-function fish_right_prompt
-    clrbg black ebbcba
-    echo -n ''
-    clrbg ebbcba 191724
-    echo -n (prompt_pwd)
-    echo -n ' '
-    clr normal
+    # # add PATH entries here
+    # # it will prepend them $PATH by fish
+    set fish_user_paths \
+        $BUN_INSTALL/bin \
+        ~/.local/share/gem/ruby/3.2.0/bin \
+        ~/projects/go/bin \
+        ~/.ghcup/bin \
+        ~/.local/bin
 end

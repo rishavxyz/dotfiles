@@ -1,0 +1,11 @@
+abbr -a G -p anywhere '| grep -i'
+abbr -a W -p anywhere --set-cursor '%| wc -l'
+abbr -a L -p anywhere --set-cursor '%| less'
+
+abbr -a i -- 'sudo pacman --needed -S'
+abbr -a s -- 'pacman -Ss'
+abbr -a r -- 'sudo pacman -Runsc'
+abbr -a rdd -- 'sudo pacman -Rddns'
+abbr -a ia -- 'sudo aura -Acax'
+abbr -a si -- 'pacman -Si'
+abbr -a sa -- 'aura -As'

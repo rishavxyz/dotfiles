@@ -12,7 +12,7 @@ swipe:
       sendkey: 'LEFTCTRL+W'
 
 threshold:
-  swipe: 0.2
+  swipe: 0.1
   pinch: 0.2
 
 interval:

@@ -1,0 +1,6 @@
+alias df='df -h'
+alias du='du -h --max-depth=0'
+alias lsb='lsblk'
+alias ping='ping -c3'
+alias up='uptime -p'
+alias poweroff='systemctl poweroff'
