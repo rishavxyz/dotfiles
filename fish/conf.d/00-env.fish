@@ -11,7 +11,7 @@ set -q XDG_VIDEOS_DIR;    or set -x XDG_VIDEOS_DIR ~/Videos
 #set -q XDG_CURRENT_DESKTOP; or set -x XDG_CURRENT_DESKTOP KDE
 
 set -q EDITOR;            or set -x EDITOR nvim
-set -q VISUAL;            or set -x VISUAL code
+set -q VISUAL;            or set -x VISUAL $EDITOR
 set -q BUN_INSTALL;       or set -x BUN_INSTALL ~/.bun
 
 set -q GHCUP_INSTALL_BASE_PREFIX

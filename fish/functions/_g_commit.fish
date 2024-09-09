@@ -4,11 +4,7 @@ function _g_commit
         return 1
     end
 
-    test (count $argv) = 0
-    and begin
-        _g_err "not enough arguments"
-        return 1
-    end
+    test (count $argv) = 0 && git commit
 
     set -l cmd $argv[1]
     set -l title $argv[2]
@@ -20,7 +16,7 @@ function _g_commit
     else if test (count $msg) = 0
         set msg $cmd: $title
     else
-        set msg $cmd "($title):" $msg
+        set msg "$cmd($title): $msg"
     end
 
     switch $cmd
@@ -31,26 +27,27 @@ function _g_commit
             set cmd ci/cd
             set do_command "git commit -m '💚 $msg'"
         case doc docs
-            set cmd docs
+            set cmd doc
             set do_command "git commit -m '📝 $msg'"
         case feat feature
             set cmd feat
             set do_command "git commit -m '✨ $msg'"
         case bugfix fix
+            set cmd fix
             set do_command "git commit -m '🐛 $msg'"
         case perf performance
             set cmd perf
             set do_command "git commit -m '⚡️ $msg'"
         case ref refactor refactore
             set cmd refactor
-            set do_command "git commit -m '♻️ $msg'"
+            set do_command "git commit -m '♻️  $msg'"
         case ui ux ui/ux
             set cmd ui
             set do_command "git commit -m '🎨 $msg'"
         case style code
             set do_command "git commit -m '🪄 $msg'"
         case test
-            set do_command "git commit -m '⚒️ $msg'"
+            set do_command "git commit -m '⚒️  $msg'"
         case '*'
             set msg $argv
             set do_command "git commit -m '$msg'"

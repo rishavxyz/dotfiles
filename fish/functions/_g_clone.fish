@@ -17,5 +17,5 @@ function _g_clone -d "git clone easy way"
         set url "https://github.com/$url"
     end
 
-    echo command git clone $url
+    command git clone $url
 end

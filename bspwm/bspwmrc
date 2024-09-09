@@ -1,4 +1,4 @@
-#!/usr/bin/sh
+#!/bin/sh
 
 startOnce() {
   [ pidof "$1" ] && killall "$1"
@@ -28,4 +28,4 @@ xsetroot -cursor_name left_ptr
 #### autostart applications
 startOnce sxhkd
 startOnce polybar
-startOnce fusuma
+#startOnce fusuma

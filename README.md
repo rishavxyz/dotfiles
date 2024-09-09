@@ -98,3 +98,7 @@ You may also use `gnome-keyring` to store git credentials.
 ```console
 $ git config --global credential.helper /usr/lib/git-core/git-credential-libsecret
 ```
+
+### NOTES
+
+- **On Void Linux, install `libXft` package to run `st` binary.**
