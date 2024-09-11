@@ -9,3 +9,12 @@ if grep -iq void /etc/os-release
 else
     alias poweroff='systemctl poweroff'
 end
+
+if type -q eza
+    alias ls='eza --icons=always'
+    alias ll='ls -l'
+    alias l='ls --tree --level=1'
+    alias la='ls -la'
+end
+type -q bat; and alias cat='bat --style=full'
+type -q tmux; and alias t=tmux

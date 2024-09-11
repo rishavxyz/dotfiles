@@ -30,13 +30,28 @@ if [ -d /etc/X11/xinit/xinitrc.d ]; then
     [ -x "$f" ] && . "$f"
   done
   unset f
+else
+  dbus-update-activation-environment DISPLAY XAUTHORITY WAYLAND_DISPLAY
 fi
 
 export _JAVA_AWT_WM_NONREPARENTING=1
 
-/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-/usr/lib/xdg-desktop-portal &
-/usr/bin/dunst &
+run() {
+  bin=$(whereis $1 | awk '{print $2}')
+  if [ ! -z $bin ] && [ -x $bin ]; then
+    pidof $1 && kill -9 $(pidof $1)
+    eval $bin
+  fi
+}
+
+run pipewire &
+sleep 1
+run xdg-desktop-portal &
+sleep 1
+run xdg-desktop-portal-gtk &
+run polkit-gnome-authentication-agent-1 &
+run dunst &
+run fusuma &
 ~/.fehbg &
 
 exec bspwm

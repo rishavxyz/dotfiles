@@ -1,5 +1,6 @@
 if status is-interactive
     set fish_greeting
+    set -q Z_CMD; and set Z_CMD j
 
     if functions -q fzf_configure_bindings
         set -q fzf_fd_opts
@@ -9,24 +10,17 @@ if status is-interactive
             -E .ghcup -E .pki -E .rustup -E .stack -E .vscode \
             -E .zen -E .android -E .gtkrc-2.0 -E .npm -E .dbus
 
-        # set -q fzf_preview_file_cmd
-        # or set fzf_preview_file_cmd cat
-
         fzf_configure_bindings \
-            --directory=\cf \
-            --history=\ch \
-            --git_status=\cg
+            --directory=\cf --history=\ch --git_status=\cg
+        #         ctrl+f        ctrl+h        ctrl+g
     end
 
-    if type -q eza
-        alias ls='eza --icons=always'
-        alias ll='ls -l'
-        alias l='ls --tree --level=1'
-        alias la='ls -la'
-    end
-
-    type -q bat; and alias cat='bat --style=full'
-    type -q z; and alias j=z
+    # key bindings
+    # ctrl + shift + ,
+    bind \e\[60\;6u "source $__fish_config_dir/config.fish && \
+      notify-send 'Fish shell' 'Config file sourced from <b>$__fish_config_dir/</b>'"
+    bind \e\[62\;6u 'fish --private' # ctrl + shift + .
+    bind \e\[63\;6u tmux #             ctrl + shift + /
 
     # # add PATH entries here
     # # it will prepend them $PATH by fish
@@ -36,6 +30,4 @@ if status is-interactive
         ~/projects/go/bin \
         ~/.ghcup/bin \
         ~/.local/bin
-
-    bind \e\[62\;4u 'fish --private'
 end

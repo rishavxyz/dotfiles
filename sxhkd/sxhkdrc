@@ -1,6 +1,9 @@
 alt + Return
   st
 
+alt + quotedbl
+  st tmux
+
 alt + shift + Return
   bspc rule -a "st-float" -o state=floating \
   rectangle=720x428+323+180 && st -c "st-float"

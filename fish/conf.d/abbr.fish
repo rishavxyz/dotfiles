@@ -48,6 +48,6 @@ function __gen_pkg_cmds -d 'generates abbrs for os package managers'
 end
 __gen_pkg_cmds
 
-abbr -a G -p anywhere ' | grep -i'
-abbr -a W -p anywhere --set-cursor '% | wc -l'
-abbr -a L -p anywhere --set-cursor '% | less'
+abbr -a G -p anywhere '| grep -i'
+abbr -a W -p anywhere --set-cursor '%| wc -l'
+abbr -a L -p anywhere --set-cursor '%| less'
