@@ -36,6 +36,6 @@ bspc rule -a "feh" state=floating
 
 xsetroot -cursor_name left_ptr
 
-#### autostart applications
-run sxhkd &
 run polybar &
+run sxhkd &
+run fusuma &
