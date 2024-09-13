@@ -47,10 +47,8 @@ run() {
 run pipewire &
 sleep .5
 run xdg-desktop-portal &
-sleep .5
-run xdg-desktop-portal-gtk &
 run polkit-gnome-authentication-agent-1 &
 run dunst &
 ~/.fehbg &
 
-exec dbus-run-session bspwm
+exec bspwm
