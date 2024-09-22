@@ -27,7 +27,8 @@ if status is-interactive
     set fish_user_paths \
         $BUN_INSTALL/bin \
         ~/.local/share/gem/ruby/3.3.0/bin \
-        ~/projects/go/bin \
+        ~/.local/share/go/bin \
         ~/.ghcup/bin \
-        ~/.local/bin
+        ~/.local/bin \
+        ~/.cargo/bin
 end

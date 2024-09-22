@@ -10,7 +10,7 @@ set -q XDG_VIDEOS_DIR; or set -x XDG_VIDEOS_DIR ~/Videos
 set -q EDITOR; or set -x EDITOR nvim
 set -q VISUAL; or set -x VISUAL $EDITOR
 set -q BUN_INSTALL; or set -x BUN_INSTALL ~/.bun
-set -x TERM xterm
+set TERM xterm
 
 set -q GHCUP_INSTALL_BASE_PREFIX
 or set -x GHCUP_INSTALL_BASE_PREFIX ~

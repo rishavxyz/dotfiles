@@ -20,11 +20,12 @@ if type -q xsel
     alias paste='xsel -ob'
 end
 
+command -qs code-oss; and alias code=code-oss
 type -q bat; and alias cat='bat --style=full'
 type -q tmux; and alias t=tmux
 
 alias df='df -h'
 alias du='du -h --max-depth=1'
-alias lsb='lsblk'
+alias lsb='lsblk -o NAME,FSTYPE,LABEL,SIZE,FSAVAIL,FSUSE%,MOUNTPOINTS'
 alias ping='ping -c3'
 alias up='uptime -p'

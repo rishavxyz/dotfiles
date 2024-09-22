@@ -1,4 +1,4 @@
-function _g_commit
+function _g_commit -a cmd -a title -a msg
     if not test -d .git
         _g_err "not in a git repo"
         return 1
@@ -6,9 +6,6 @@ function _g_commit
 
     test (count $argv) = 0 && git commit
 
-    set -l cmd $argv[1]
-    set -l title $argv[2]
-    set -l msg $argv[3..]
     set -l do_command
 
     if test (count $title) = 0

@@ -9,7 +9,13 @@ alt + shift + Return
   rectangle=720x428+323+180 && st -c "st-float"
 
 alt + space
+  dmenu_run -p '>' -nb '#191724' -nf '#c4a7e7' -sb '#c4a7e7' -sf '#191724'
+
+alt + shift + space
   rofi -show drun
+
+super + period
+  rofi -modi emoji -show emoji
 
 alt + shift + r
   bspc wm --restart; notify-send 'BSPWM restarted successfully'
@@ -19,6 +25,9 @@ alt + shift + q
 
 alt + {_, control} + q
   bspc node {--close, --kill}
+
+alt + BackSpace
+  bspc node --close
 
 super + l
   slock
