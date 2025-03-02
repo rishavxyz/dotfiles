@@ -8,6 +8,7 @@
 - **Shell** zsh
 - **Status bar** polybar
 - **Fonts** Monaspace (sans and mono)
+- **IDE** VSCode
 
 I don't use a login/display manager. The command I use is `startx` provided by `xorg-xinit` package.
 
